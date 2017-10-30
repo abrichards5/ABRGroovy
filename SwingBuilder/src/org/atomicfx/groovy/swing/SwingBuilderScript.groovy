@@ -47,3 +47,13 @@ frame.setMaximumSize(new Dimension(400,400));
 frame.setResizable(false);
 frame.setLocationRelativeTo(null);
 frame.setVisible(true);
+
+hidePasswordCheckbox.addItemListener(new ItemListener() {
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			httpProxyPassword.setEchoChar('*');
+		} else {
+			 httpProxyPassword.setEchoChar((char) 0);
+		}
+	}
+});
