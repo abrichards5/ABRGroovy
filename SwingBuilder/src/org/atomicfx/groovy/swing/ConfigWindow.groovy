@@ -3,10 +3,12 @@ import java.awt.event.*
 
 import javax.swing.JFrame
 import javax.swing.WindowConstants as WC
+import javax.swing.border.LineBorder
 import javax.swing.event.*
 
 import groovy.beans.Bindable
 import groovy.swing.SwingBuilder
+import groovy.swing.factory.LineBorderFactory
 
 
 class aModel {
@@ -25,6 +27,7 @@ model.setEnv('SP11CT')
 model.setUsername('username')
 
 def frameDim = [300, 150] as Dimension;
+def lineBorder = new LineBorder(Color.RED)
 SwingBuilder swing = new SwingBuilder()
 JFrame frame = swing.build() {
 	frame(id:'mainFrame'
@@ -36,6 +39,7 @@ JFrame frame = swing.build() {
 		borderLayout(vgap: 20,hgap:20)
 
 		panel(constraints:BorderLayout.CENTER,border:compoundBorder([
+			 // lineBorder,
 			emptyBorder(20),
 			titledBorder('Title:')
 		])
