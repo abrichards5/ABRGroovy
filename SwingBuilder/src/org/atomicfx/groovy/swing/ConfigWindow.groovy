@@ -38,13 +38,20 @@ JFrame frame = swing.build() {
 	, defaultCloseOperation:WC.DISPOSE_ON_CLOSE) {
 		borderLayout(vgap: 20,hgap:20)
 
-		panel(constraints:BorderLayout.CENTER,border:compoundBorder([
-			 // lineBorder,
-			emptyBorder(20),
-			titledBorder('Title:')
-		])
-		,size:[300, 100]) {
-			panel(constraints:BorderLayout.CENTER,border:emptyBorder(10)) {
+		panel(constraints:BorderLayout.CENTER
+			,border:compoundBorder([
+			 lineBorder
+			,emptyBorder(20)
+			,titledBorder('Title:')
+				])
+			,borderLayout(vgap: 20,hgap:20)		
+			,size:[300, 100]) {
+				panel(constraints:BorderLayout.CENTER
+					,border:compoundBorder([
+						lineBorder,
+						,emptyBorder(10)
+						])
+				) {
 				gridLayout(cols: 2, rows: 6)
 				label 'Input text: '
 				input = textField(columns:10, actionPerformed: {
