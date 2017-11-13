@@ -5,7 +5,6 @@ import javax.swing.JFrame
 import javax.swing.WindowConstants as WC
 import javax.swing.border.LineBorder
 import javax.swing.event.*
-
 import groovy.beans.Bindable
 import groovy.swing.SwingBuilder
 import groovy.swing.factory.LineBorderFactory
@@ -19,15 +18,23 @@ class aModel {
 	@Bindable String env
 }
 
-def envOptions=['MIE', 'SP11CT','SP11TEST']
+
+// set to 0 to disable debug borders.
+def debugBorderWidth=1;
+
+def envOptions=['MIE', 'SP11CT', 'SP11TEST']
 
 def model = new aModel();
 //initialize
 model.setEnv('SP11CT')
 model.setUsername('username')
+model.setPassword('pass')
 
 def frameDim = [300, 150] as Dimension;
-def lineBorder = new LineBorder(Color.RED)
+def defaultInsets = [0, 0, 10, 0]
+// used for visual debug.  set size to 0 to hide
+def lineBorder = new LineBorder(Color.RED,debugBorderWidth,false)
+
 SwingBuilder swing = new SwingBuilder()
 JFrame frame = swing.build() {
 	frame(id:'mainFrame'
@@ -36,56 +43,112 @@ JFrame frame = swing.build() {
 	, visible:false
 	, pack:true
 	, defaultCloseOperation:WC.DISPOSE_ON_CLOSE) {
-		borderLayout(vgap: 20,hgap:20)
+		// set layout for this frame
+		borderLayout(vgap: 5,hgap:5)
 
 		panel(constraints:BorderLayout.CENTER
-			,border:compoundBorder([
-			 lineBorder
-			,emptyBorder(20)
-			,titledBorder('Title:')
-				])
-			,borderLayout(vgap: 20,hgap:20)		
-			,size:[300, 100]) {
-				panel(constraints:BorderLayout.CENTER
-					,border:compoundBorder([
+		,border:compoundBorder([
+			lineBorder
+			,
+			emptyBorder(20)
+			,
+			titledBorder('Title:')
+		])
+		,size:[300, 100]) {
+			panel(
+					border:compoundBorder([
 						lineBorder,
-						,emptyBorder(10)
-						])
-				) {
-				gridLayout(cols: 2, rows: 6)
-				label 'Input text: '
-				input = textField(columns:10, actionPerformed: {
-					echo.text = input.text.toUpperCase()
-				})
-				label 'Echo: '
-				echo = label()
+						,
+						emptyBorder(10)
+					])
+					) {
+						// set layout for this panel
+						// warning gridBagLayout does NOT support nesting
+						gridBagLayout()
 
-				label 'Environment: '
-				env = comboBox(id: 'env', items: envOptions,
-				selectedItem: bind(target: model, targetProperty: 'env'))
-			}
-			
-			
-			
-			panel(layout:new GridBagLayout()) {
-				def ins = new Insets(10,10,0,10)
-				label(text:'Username',  constraints:gbc(gridx:0,gridy:0,gridwidth:2,insets:ins))
-				textField(id:'usernameTextField', columns:15,  constraints:gbc(gridx:2,gridy:0,gridwidth:4,insets:ins))
-				label(text:'Password',  constraints:gbc(gridx:0,gridy:1,gridwidth:2,insets:ins))
-				passwordField(id: 'passwordTextField', columns:15, constraints:gbc(gridx:2,gridy:1,gridwidth:4,insets:ins))
-			}
+						row = 0
+
+						label('Input text: ',constraints: gbc(gridx:0,gridy:row,fill:GridBagConstraints.HORIZONTAL,insets:defaultInsets) )
+
+						input = textField(columns:10,
+						,constraints: gbc(gridx:1,gridy:row
+						//,gridwidth:REMAINDER
+						//,anchor:WEST
+						,fill:GridBagConstraints.HORIZONTAL,insets:defaultInsets) ,
+						actionPerformed: {
+							echo.text = input.text.toUpperCase()
+						})
+
+						row++
+
+						label('Echo: ',constraints: gbc(gridx:0,gridy:row,fill:GridBagConstraints.HORIZONTAL,insets:defaultInsets) )
+
+						echo = label(constraints: gbc(gridx:1,gridy:row,fill:GridBagConstraints.HORIZONTAL,insets:defaultInsets))
+
+						row++
+
+						label('Environment: ',constraints: gbc(gridx:0,gridy:row,fill:GridBagConstraints.HORIZONTAL,insets:defaultInsets))
+						env=comboBox(id: 'env', items: envOptions,
+						//selectedItem: bind(target: model, targetProperty: 'env')
+						selectedItem: 'SP11CT'
+						,constraints: gbc(gridx:1,gridy:row,fill:GridBagConstraints.HORIZONTAL,insets:defaultInsets))
+						
+						
+						
+						row++
+						panel(constraints: gbc(gridx:0,gridy:row,gridwidth:GridBagConstraints.REMAINDER,fill:GridBagConstraints.HORIZONTAL,insets:defaultInsets),
+						,border:compoundBorder([
+							lineBorder
+							,
+							emptyBorder(20)
+						])
+						) {
+							gridLayout(columns:2, rows:3)
+							label(text:'Username')
+							textField(model.getUsername(),id:'usernameTextField', columns:15
+								//,text: bind(target: model, targetProperty: 'username')
+								)
+
+							label(text:'Password')
+							//passwordTextField= textField(model.getPassword(),id: 'passwordTextField', columns:15)
+							passwordTextField= passwordField(model.getPassword(),id: 'passwordTextField', columns:15)
+							label(text:'Show Password')
+							checkBox(id: 'showPasswordCheckbox')
+						}
+					}
+		}
+		// button panel
+		panel(constraints:BorderLayout.SOUTH
+		,border:compoundBorder([
+			lineBorder
+			,
+			emptyBorder(10)
+			,
+			titledBorder('buttons:')
+		])
+		) {
 			button(defaultButton:true, text:'Save',
 			actionPerformed: { logModel(model) })
 			button(defaultButton:true, text:'Exit',
 			actionPerformed: { mainFrame.dispose() })
-
-			bind(source:usernameTextField, sourceProperty:'text', target:model, targetProperty:'username')
-			bind(source:passwordTextField, sourceProperty:'text', target:model, targetProperty:'password')
 		}
 
+		bind(source:usernameTextField, sourceProperty:'text', target:model, targetProperty:'username')
+		bind(source:passwordTextField, sourceProperty:'text', target:model, targetProperty:'password')
+		bind(source:env, sourceProperty:'selectedItem', target:model, targetProperty:'env')
 
-
-
+		// examples of registered listeners
+		showPasswordCheckbox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					passwordTextField.setEchoChar((char) 0);
+				} else {
+					passwordTextField.setEchoChar((char)'*');
+				}
+			}
+		});
+		
+		
 		input.document.addDocumentListener(
 				[insertUpdate: {
 						echo.text = input.text
@@ -107,7 +170,10 @@ frame.setMinimumSize(new Dimension(400,400));
 frame.setMaximumSize(new Dimension(400,400));
 frame.setResizable(false);
 frame.setLocationRelativeTo(null);
+frame.pack();
 frame.setVisible(true);
+
+
 
 def logModel(aModel model) {
 	System.out.println(model.getEnv());
