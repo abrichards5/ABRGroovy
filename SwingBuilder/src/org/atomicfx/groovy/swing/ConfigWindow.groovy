@@ -127,9 +127,9 @@ JFrame frame = swing.build() {
 			titledBorder('buttons:')
 		])
 		) {
-			button(defaultButton:true, text:'Save',
+			saveButton = button(defaultButton:false, text:'Save',
 			actionPerformed: { logModel(model) })
-			button(defaultButton:true, text:'Exit',
+			exitButton = button(defaultButton:true, text:'Exit',
 			actionPerformed: { mainFrame.dispose() })
 		}
 
@@ -170,6 +170,7 @@ frame.setMinimumSize(new Dimension(400,400));
 frame.setMaximumSize(new Dimension(400,400));
 frame.setResizable(false);
 frame.setLocationRelativeTo(null);
+//frame.getRootPane().setDefaultButton(saveButton);
 frame.pack();
 frame.setVisible(true);
 
