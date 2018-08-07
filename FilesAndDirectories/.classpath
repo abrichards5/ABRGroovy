@@ -4,5 +4,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_SUPPORT"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
+	<classpathentry kind="lib" path="/opt/foss/logback-classic/1.2.3/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="/opt/foss/logback-classic/1.2.3/logback-core-1.2.3.jar"/>
+	<classpathentry kind="lib" path="/opt/foss/logback-classic/1.2.3/logback-classic-1.2.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

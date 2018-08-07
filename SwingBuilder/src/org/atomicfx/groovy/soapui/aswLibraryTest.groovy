@@ -1,3 +1,5 @@
+package org.atomicfx.groovy.soapui;
+
 // unique to soapui tool environment.  will not run standalone
 try {
 // Import the class into the context

@@ -1,3 +1,5 @@
+package org.atomicfx.groovy.swing;
+
 import java.awt.*
 import java.awt.event.*
 

@@ -80,7 +80,7 @@ public class MyTableModel extends AbstractTableModel {
 			// the table automatically converts value to an Integer,
 			// so you only need the code in the 'else' part of this
 			// 'if' block.
-			// XXX: See TableEditDemo.java for a better solution!!!
+			// See TableEditDemo.java for a better solution!!!
 			try {
 				data[row][col] = Integer.valueOf(value.toString());
 				fireTableCellUpdated(row, col);

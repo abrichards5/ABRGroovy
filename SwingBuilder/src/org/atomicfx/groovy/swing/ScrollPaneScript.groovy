@@ -1,3 +1,5 @@
+package org.atomicfx.groovy.swing;
+
 import groovy.swing.SwingBuilder
 import javax.swing.WindowConstants as WC
 import javax.swing.border.LineBorder

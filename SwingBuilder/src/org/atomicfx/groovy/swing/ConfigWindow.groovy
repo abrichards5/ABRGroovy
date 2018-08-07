@@ -1,3 +1,5 @@
+package org.atomicfx.groovy.swing;
+
 import java.awt.*
 import java.awt.event.*
 
@@ -10,7 +12,7 @@ import groovy.swing.SwingBuilder
 import groovy.swing.factory.LineBorderFactory
 
 
-class aModel {
+class aaModel {
 	@Bindable String select
 	@Bindable String text
 	@Bindable String username
@@ -24,7 +26,7 @@ def debugBorderWidth=1;
 
 def envOptions=['MIE', 'SP11CT', 'SP11TEST']
 
-def model = new aModel();
+def model = new aaModel();
 //initialize
 model.setEnv('SP11CT')
 model.setUsername('username')
@@ -176,7 +178,7 @@ frame.setVisible(true);
 
 
 
-def logModel(aModel model) {
+def logModel(aaModel model) {
 	System.out.println(model.getEnv());
 	System.out.println(model.getUsername());
 	System.out.println(model.getPassword());

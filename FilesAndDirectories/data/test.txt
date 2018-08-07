@@ -1,0 +1,5 @@
+Free form text
+test search and replace
+
+AAA-awesome-AAA
+		AAA-awesome-AAA AAA-awesome-AAA

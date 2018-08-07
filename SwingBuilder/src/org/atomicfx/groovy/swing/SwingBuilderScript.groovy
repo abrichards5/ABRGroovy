@@ -1,3 +1,5 @@
+package org.atomicfx.groovy.swing;
+
 import groovy.swing.SwingBuilder
 import java.awt.event.*
 import javax.swing.event.*

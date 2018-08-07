@@ -1,3 +1,5 @@
+package org.atomicfx.groovy.soapui;
+
 // Groovy support library
 // Author: Adam Richards
 // Description: Library of reusable groovy code for ASW soapui testing
