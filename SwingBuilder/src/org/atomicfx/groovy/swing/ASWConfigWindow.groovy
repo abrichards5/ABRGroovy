@@ -7,6 +7,11 @@ import javax.swing.JFrame
 import javax.swing.WindowConstants as WC
 import javax.swing.border.LineBorder
 import javax.swing.event.*
+
+import org.atomicfx.groovy.swing.demo.MyTableModel
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
 import groovy.beans.Bindable
 import groovy.swing.SwingBuilder
 import groovy.swing.factory.LineBorderFactory
@@ -19,7 +24,8 @@ class aModel {
 	@Bindable String password
 }
 
-
+def log = LoggerFactory.getLogger(MyTableModel.class.getName());
+log.info("begin");
 def envOptions=['MIE', 'SP11CT', 'SP11TEST']
 def envPathOptions=['PROXY', 'DIRECT']
 

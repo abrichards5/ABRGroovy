@@ -1,7 +1,10 @@
 package org.atomicfx.groovy.files;
 
 //#!/usr/bin/env groovy
-
+/**
+ * structured as a groovy script
+ * Run via the groovy executable
+ */
 def currentDir = new File(".");
 
 def backupFile;
@@ -13,11 +16,11 @@ def exts = [".txt", ".foo"]
 
 //Replace the value of srcExp to a String or regular expression
 //to search for.
-def srcExp = "AAawesomeAA"
+def srcExp = "AAAawesomeAAA"
 
 //Replace the value of replaceText with the value new value to
 //replace srcExp
-def replaceText = "AAawesomeAA"
+def replaceText = "AAAawesomeAAA"
 
 currentDir.eachFileRecurse(
 		{file ->

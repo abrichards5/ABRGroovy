@@ -1,9 +1,10 @@
 package org.atomicfx.groovy.swing.demo;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.table.AbstractTableModel;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A sample table model
@@ -14,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
 public class MyTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 8531204304560938880L;
-	private static final Logger log = Logger.getLogger(MyTableModel.class.getName());
+	private static final Logger log = LoggerFactory.getLogger(MyTableModel.class.getName());
 
 	public MyTableModel() {
 	}

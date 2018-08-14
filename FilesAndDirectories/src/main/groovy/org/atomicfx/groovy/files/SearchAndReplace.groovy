@@ -8,7 +8,11 @@ package org.atomicfx.groovy.files;
 //])
 
 import groovy.util.logging.Slf4j
-
+/**
+ * Structured to run as Java Application
+ * @author arichards
+ *
+ */
 @Slf4j
 class GroovyClass {
 
@@ -47,11 +51,11 @@ class GroovyClass {
 					}
 				}
 				);
-				currentDir.eachDirRecurse { dir ->
-					log.info("DIR: {} ",dir.getCanonicalPath())
-				}
-				
-				
+		currentDir.eachDirRecurse { dir ->
+			log.info("DIR: {} ",dir.getCanonicalPath())
+		}
+
+
 	}
 
 }
