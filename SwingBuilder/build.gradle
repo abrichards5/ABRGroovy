@@ -1,0 +1,22 @@
+apply plugin: 'groovy'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+// Dependencies
+configure(allprojects)
+{
+	ext.groovyVersion = '2.4.10'
+	ext.slf4jVersion = '1.7.25'
+	ext.logbackVersion = '1.2.3'
+}
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+   compile "org.slf4j:slf4j-api:$slf4jVersion"
+   compile "ch.qos.logback:logback-classic:$logbackVersion"
+   testCompile 'junit:junit:4.12'
+}

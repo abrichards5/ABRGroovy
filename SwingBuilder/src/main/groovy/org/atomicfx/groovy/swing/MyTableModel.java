@@ -1,10 +1,11 @@
-package org.atomicfx.groovy.swing.demo;
-
+package org.atomicfx.groovy.swing;
 
 import javax.swing.table.AbstractTableModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import groovy.util.logging.Slf4j;
 
 /**
  * A sample table model
@@ -12,10 +13,11 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:james@coredevelopers.net">James Strachan</a>
  * @version $Revision$
  */
+@Slf4j
 public class MyTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 8531204304560938880L;
-	private static final Logger log = LoggerFactory.getLogger(MyTableModel.class.getName());
+	private static final Logger log = LoggerFactory.getLogger(MyTableModel.class);
 
 	public MyTableModel() {
 	}
@@ -69,8 +71,8 @@ public class MyTableModel extends AbstractTableModel {
 	 * Don't need to implement this method unless your table's data can change.
 	 */
 	public void setValueAt(Object value, int row, int col) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Setting value at " + row + "," + col + " to " + value + " (an instance of " + value.getClass()
+		if (log.isTraceEnabled()) {
+			log.trace("Setting value at " + row + "," + col + " to " + value + " (an instance of " + value.getClass()
 					+ ")");
 		}
 
@@ -86,7 +88,7 @@ public class MyTableModel extends AbstractTableModel {
 				data[row][col] = Integer.valueOf(value.toString());
 				fireTableCellUpdated(row, col);
 			} catch (NumberFormatException e) {
-				log.log(Level.SEVERE, "The \"" + getColumnName(col) + "\" column accepts only integer values.");
+				log.error("The \"" + getColumnName(col) + "\" column accepts only integer values.");
 			}
 		} else {
 			data[row][col] = value;

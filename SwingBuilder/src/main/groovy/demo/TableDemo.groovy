@@ -1,4 +1,4 @@
-package org.atomicfx.groovy.swing.demo
+package demo
 import java.awt.BorderLayout
 import javax.swing.BorderFactory
 import groovy.swing.SwingBuilder

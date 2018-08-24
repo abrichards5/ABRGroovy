@@ -8,13 +8,10 @@ import javax.swing.WindowConstants as WC
 import javax.swing.border.LineBorder
 import javax.swing.event.*
 
-import org.atomicfx.groovy.swing.demo.MyTableModel
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 import groovy.beans.Bindable
 import groovy.swing.SwingBuilder
-import groovy.swing.factory.LineBorderFactory
 
 
 class aModel {

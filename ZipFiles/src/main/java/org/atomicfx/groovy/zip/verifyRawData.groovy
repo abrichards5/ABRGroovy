@@ -1,3 +1,4 @@
+package org.atomicfx.groovy.zip
 // Groovy Script to verify the notification classes are listed in the template RawData.java file
 // Author: Adam Richards
 

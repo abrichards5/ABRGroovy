@@ -1,3 +1,4 @@
+package org.atomicfx.groovy.zip
 // Groovy Script to analyze the ISS zip file
 // Author: Adam Richards
 
